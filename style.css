@@ -1,0 +1,37 @@
+/* Добавить в <style> — блок стилей для раздела Костюмы */
+.suits{ background:var(--surface-2); }
+.suits-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+.suits-head{ font-weight:700; font-size:22px; letter-spacing:.6px; text-transform:uppercase; color:#f0f0f0; margin:0 0 16px; }
+
+.suit-grid{ display:grid; gap:var(--gap); grid-template-columns:1fr 1fr; }
+
+.suit-card{ position:relative; border-radius:var(--radius); overflow:hidden; background:var(--surface-3); box-shadow:var(--shadow-soft); will-change:transform; transition:transform .25s ease, box-shadow .25s ease; }
+.suit-card::after{ content:""; position:absolute; inset:0; border-radius:var(--radius); box-shadow:inset 0 0 0 1px var(--gold-border); pointer-events:none; }
+/* Анимированный блик */
+.suit-card::before{
+  content:""; position:absolute; inset:-2px;
+  background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.04) 35%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.04) 65%, transparent 80%);
+  transform:translateX(-100%); transition:transform .8s cubic-bezier(.2,.6,.2,1);
+}
+.suit-card:hover{ transform:translateY(-3px) scale(1.02); box-shadow:var(--shadow-medium); }
+.suit-card:hover::before{ transform:translateX(100%); }
+
+.suit-media{ aspect-ratio:4/5; overflow:hidden; }
+.suit-media img{ width:100%; height:100%; object-fit:cover; filter:saturate(112%) contrast(107%); transform:scale(1) translateZ(0); transition:transform .8s cubic-bezier(.2,.6,.2,1); }
+.suit-card:hover .suit-media img{ transform:scale(1.06); }
+
+.suit-body{ padding:16px 18px 20px; }
+.suit-title{ font-weight:700; font-size:18px; margin:0 0 6px; color:#f0f0f0; text-transform:uppercase; letter-spacing:.5px; }
+.suit-sub{ font-size:13px; color:var(--muted); }
+
+/* Reveal — более выразительный вход для карточек костюмов */
+.reveal.suit-card{ opacity:0; transform:translateY(22px) scale(.98); }
+.reveal.suit-card.is-visible{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+
+/* Адаптив */
+@media (max-width:1100px){
+  .suits-wrap{ grid-template-columns:1fr; }
+}
+@media (max-width:560px){
+  .suit-grid{ grid-template-columns:1fr; }
+}

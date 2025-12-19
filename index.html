@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="description" content="Serioz & Seriozka — премиальные свадебные украшения, костюмы и платья. Вечная элегантность." />
+  <title>Serioz & Seriozka — Вечная элегантность</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Palette — zxc red/white/black */
+      --white:#f5f5f5;
+      --black:#0a0a0a;
+      --red:#ff0033;
+      --muted:#b1b5bb;
+
+      /* Surfaces */
+      --surface:#0a0a0a;
+      --surface-2:#101013;
+      --surface-3:#16171a;
+      --footer:#0a0a0a;
+
+      /* Layout */
+      --max-w:1200px;
+      --gap:24px;
+      --radius:16px;
+      --nav-h:68px;
+
+      /* Effects */
+      --shadow-soft: 0 12px 30px rgba(0,0,0,0.28);
+      --shadow-medium: 0 18px 40px rgba(0,0,0,0.36);
+      --red-gradient: linear-gradient(135deg,#6d0017 0%,#a80023 40%,#ff0033 70%,#cc002c 100%);
+      --red-border: rgba(255,0,51,.65);
+
+      /* Alias old vars to new theme */
+      --ivory:#ffffff;
+      --champagne: var(--red);
+      --graphite: var(--white);
+      --gold-gradient: var(--red-gradient);
+      --gold-border: var(--red-border);
+
+      /* Typography */
+      --font-sans:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      /* Hero */
+      --hero-overlay: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.65));
+      --hero-text:#ffffff;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      background:var(--surface);
+      color:var(--graphite);
+      font-family:var(--font-sans);
+      scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    img{max-width:100%; display:block;}
+    a{color:inherit; text-decoration:none;}
+    .container{max-width:var(--max-w); margin-inline:auto; padding-inline:24px;}
+
+    /* Top Nav */
+    .nav{
+      position:fixed; inset-inline:0; top:0; z-index:1000;
+      backdrop-filter:saturate(180%) blur(12px);
+      background:linear-gradient(to bottom, rgba(10,10,10,.92), rgba(10,10,10,.72));
+      border-bottom:1px solid rgba(255,0,51,0.24);
+    }
+    .nav .inner{
+      width:100%; max-width:var(--max-w);
+      padding:12px 24px; display:flex; align-items:center; gap:18px; min-height:var(--nav-h);
+    }
+    .brand{display:flex; align-items:center; gap:12px; flex:1;}
+    .brand-mark{width:36px; height:36px; border-radius:50%; background:var(--gold-gradient); box-shadow:0 6px 18px rgba(255,0,51,.28);}
+    .brand-name{font-weight:700; letter-spacing:.6px; font-size:18px; color:#f0f0f0; text-transform:uppercase;}
+    .nav-links{display:flex; gap:18px; align-items:center;}
+    .nav-link{padding:8px 10px; color:#d8d8d8; border-bottom:2px solid transparent; transition:border-color .18s ease, color .18s ease;}
+    .nav-link:hover{color:var(--red); border-color:var(--red);}
+    .nav-cta{padding:10px 16px; border-radius:999px; border:1px solid var(--gold-border); color:#ffffff; transition:background .28s ease, color .18s ease, box-shadow .18s ease;}
+    .nav-cta:hover{background:var(--gold-gradient); color:#ffffff; box-shadow:0 10px 24px rgba(255,0,51,.28);}
+
+    /* Sections common */
+    section{position:relative; min-height:100vh; display:flex; align-items:center; scroll-margin-top:calc(var(--nav-h) + 12px);}
+    .section-pad{ padding:100px 0; }
+    .section-title{ font-weight:700; font-size:40px; line-height:1.15; margin:0 0 18px; color:#f0f0f0; text-transform:uppercase; letter-spacing:.8px; }
+    .section-title::after{ content:""; display:block; width:72px; height:2px; background:var(--red); margin-top:12px; }
+    .section-sub{ color:var(--muted); font-size:15px; margin-bottom:34px; }
+
+    /* Hero */
+    .hero{min-height:100vh; isolation:isolate; overflow:hidden; color:var(--hero-text);}
+    .hero-media{position:absolute; inset:0; z-index:0; pointer-events:none;}
+    .hero-media img{
+      width:120%; height:120%; object-fit:cover; object-position:center;
+      transform-origin:center; animation:kenburns 36s ease-in-out infinite alternate;
+      filter:grayscale(10%) contrast(110%) saturate(110%);
+    }
+    @keyframes kenburns{
+      0%{transform:scale(1) translate3d(0,0,0)}
+      45%{transform:scale(1.12) translate3d(-2%, -1%, 0)}
+      100%{transform:scale(1.22) translate3d(3%, 2%, 0)}
+    }
+    .hero::after{content:""; position:absolute; inset:0; background:var(--hero-overlay); z-index:0; pointer-events:none;}
+    .hero-content{position:relative; z-index:1; width:100%; padding:0 24px; text-align:center;}
+    .logo-lockup{display:inline-flex; align-items:center; gap:18px; margin-bottom:22px;}
+    .logo-circle{width:64px; height:64px; border-radius:50%; background:var(--gold-gradient); box-shadow:0 12px 34px rgba(255,0,51,.35); border:1px solid rgba(255,255,255,.18);}
+    .logo-type{font-weight:700; font-size:34px; letter-spacing:.9px; text-transform:uppercase; text-shadow:0 0 12px rgba(255,0,51,.35), 0 2px 24px rgba(255,0,51,.18);}
+    .hero-tag{font-size:16px; letter-spacing:.4px; color:#e6e6e6; margin-bottom:28px; text-transform:uppercase;}
+    .hero-cta{display:inline-flex; align-items:center; gap:12px; border:1px solid var(--gold-border); color:#ffffff; padding:12px 22px; border-radius:999px; backdrop-filter:saturate(160%) blur(6px); background:linear-gradient(to bottom, rgba(255,255,255,.06), rgba(255,255,255,.02)); transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;}
+    .hero-cta:hover{background:var(--gold-gradient); color:#ffffff; transform:translateY(-2px); box-shadow:0 16px 36px rgba(255,0,51,.35), inset 0 1px 0 rgba(255,255,255,.24);}
+
+    /* Categories */
+    .categories{ background:var(--surface-2); }
+    .grid{ display:grid; gap:var(--gap); grid-template-columns:repeat(3, 1fr); }
+    .card{ position:relative; border-radius:var(--radius); overflow:hidden; background:var(--surface-3); box-shadow:var(--shadow-soft); transform:translateZ(0); }
+    .card-media{ position:relative; aspect-ratio:4/3; overflow:hidden; }
+    .card-media img{ width:100%; height:100%; object-fit:cover; transform:scale(1); transition:transform .8s cubic-bezier(.2,.6,.2,1); filter:saturate(110%) contrast(105%); }
+    .card:hover .card-media img{ transform:scale(1.06); }
+    .card::after{ content:""; position:absolute; inset:0; border-radius:var(--radius); box-shadow:inset 0 0 0 1px var(--gold-border); pointer-events:none; }
+    .card-body{ padding:18px 18px 22px; }
+    .card-title{ font-weight:700; font-size:22px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.6px; color:#f0f0f0; }
+    .card-sub{ color:var(--muted); font-size:13px; }
+
+    /* About (Parallax) */
+    .about{ background:var(--surface-2); min-height:110vh; }
+    .about-wrap{ position:relative; display:grid; grid-template-columns:1.2fr .8fr; gap:48px; align-items:center; }
+    .about-img{ position:relative; overflow:hidden; border-radius:22px; box-shadow:var(--shadow-medium); height:70vh; transform:translateY(-50px); will-change:transform; }
+    .about-img img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:grayscale(8%) contrast(108%); }
+    .about-copy{ padding:18px; }
+    .about-head{ font-weight:700; font-size:30px; margin:0 0 16px; text-transform:uppercase; letter-spacing:.7px; color:#f0f0f0; }
+    .about-text{ color:#d2d4d8; line-height:1.7; }
+
+    /* Gallery (Horizontal slider) */
+    .gallery{ background:var(--surface-3); min-height:110vh; }
+    .slider{ position:relative; }
+    .slider-rail{ display:flex; gap:24px; overflow-x:auto; padding-bottom:12px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+    .slide{ flex:0 0 70%; max-width:70%; border-radius:20px; overflow:hidden; box-shadow:var(--shadow-medium); scroll-snap-align:center; background:var(--surface-2); }
+    .slide img{ width:100%; height:60vh; object-fit:cover; filter:grayscale(6%) contrast(108%); }
+    .slider-controls{ position:relative; display:flex; justify-content:center; gap:12px; margin-top:18px; }
+    .ctrl{ width:44px; height:44px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:#141416; color:#e8e8e8; display:grid; place-items:center; box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease; cursor:pointer; }
+    .ctrl:hover{ transform:translateY(-1px); box-shadow:var(--shadow-medium); background:#1a1c1f; border-color:var(--gold-border); color:#ffffff; }
+    .ctrl svg{ width:18px; height:18px; }
+
+    /* Trust & Contact */
+    .trust{ background:var(--surface-2); min-height:110vh; }
+    .quotes{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-bottom:42px; }
+    .quote{ border-radius:20px; background:#131417; padding:24px; box-shadow:var(--shadow-soft); border:1px solid rgba(255,0,51,.25); }
+    .quote p{ font-size:18px; line-height:1.6; margin:0 0 12px; color:#f0f0f0; }
+    .quote small{ color:var(--muted); }
+
+    .contact{ display:grid; grid-template-columns:1.1fr .9fr; gap:42px; align-items:start; }
+    .form{ background:#131417; border-radius:20px; box-shadow:var(--shadow-soft); padding:24px; border:1px solid rgba(255,0,51,.25); }
+    .field{ margin-bottom:16px; }
+    .label{ font-size:12px; color:var(--muted); margin-bottom:8px; display:block; letter-spacing:.3px; text-transform:uppercase; }
+    .input, .textarea{ width:100%; border:none; outline:none; padding:12px 0; background:transparent; border-bottom:1px solid rgba(255,255,255,.18); transition:border-color .18s ease, color .18s ease; color:#f0f0f0; }
+    .input::placeholder, .textarea::placeholder{ color:#9aa0a6; }
+    .input:focus, .textarea:focus{ border-color:var(--champagne); color:#ffffff; }
+    .textarea{ min-height:120px; resize:vertical; }
+    .submit{ margin-top:8px; display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:999px; border:1px solid var(--gold-border); background:transparent; color:#ffffff; transition:background .28s ease, transform .18s ease, box-shadow .18s ease; }
+    .submit:hover{ background:var(--gold-gradient); transform:translateY(-1px); box-shadow:0 12px 30px rgba(255,0,51,.35); }
+
+    .contact-aside{ padding:12px 0; }
+    .contact-aside h4{ font-weight:700; font-size:18px; margin:0 0 12px; text-transform:uppercase; letter-spacing:.6px; color:#f0f0f0; }
+    .contact-aside p{ color:var(--muted); margin:0 0 16px; }
+    .social{ display:flex; gap:12px; }
+    .social a{ width:42px; height:42px; border-radius:999px; border:1px solid rgba(255,255,255,.14); display:grid; place-items:center; background:#141416; color:#e8e8e8; box-shadow:var(--shadow-soft); transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease; }
+    .social a:hover{ transform:translateY(-2px); box-shadow:var(--shadow-medium); background:#1a1c1f; border-color:var(--gold-border); color:#ffffff; }
+    .social svg{ width:18px; height:18px; }
+
+    /* Footer */
+    .footer{ background:var(--footer); color:#e7e9ee; padding:48px 24px; border-top:1px solid rgba(255,0,51,.24); }
+    .footer .container{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .foot-brand{ display:flex; align-items:center; gap:12px; }
+    .foot-brand .brand-mark{ box-shadow:0 12px 34px rgba(255,0,51,.35); border:1px solid rgba(255,255,255,.12); }
+    .foot-links{ display:flex; gap:18px; justify-content:flex-end; align-items:center; }
+    .foot-link{ color:#c9ced6; transition:color .18s ease; }
+    .foot-link:hover{ color:#ffffff; }
+
+    /* Reveal Animations */
+    .reveal{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+    /* Media queries */
+    @media (max-width:1100px){
+      .about-wrap{ grid-template-columns:1fr; }
+      .about-img{ height:54vh; }
+      .contact{ grid-template-columns:1fr; }
+      .quotes{ grid-template-columns:1fr 1fr; }
+      .slide{ flex-basis:80%; max-width:80%; }
+    }
+    @media (max-width:860px){
+      .grid{ grid-template-columns:1fr 1fr; }
+      .nav .inner{ padding:10px 18px; }
+      .logo-type{ font-size:28px; }
+      .section-title{ font-size:32px; }
+    }
+    @media (max-width:560px){
+      .nav-links{ display:none; }
+      .section-pad{ padding:78px 0; }
+      .grid{ grid-template-columns:1fr; }
+      .quotes{ grid-template-columns:1fr; }
+      .slide img{ height:52vh; }
+      .hero-cta{ padding:11px 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fixed Nav -->
+  <nav class="nav" aria-label="Главная навигация">
+    <div class="inner container">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-name">Serioz &amp; Seriozka</div>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" href="#hero" data-scroll>Главная</a>
+        <a class="nav-link" href="#categories" data-scroll>Категории</a>
+        <a class="nav-link" href="#about" data-scroll>О бренде</a>
+        <a class="nav-link" href="#gallery" data-scroll>Лукбук</a>
+        <a class="nav-link" href="#trust" data-scroll>Контакты</a>
+      </div>
+      <a class="nav-cta" href="#trust" data-scroll>Связаться</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero" class="hero" aria-label="Главный экран">
+    <div class="hero-media" aria-hidden="true">
+      <img src="https://i.pinimg.com/1200x/f1/c8/4d/f1c84d0040a599f5554aa6e78b7b42fa.jpg" alt="Свадебная пара — изящная эстетика" />
+    </div>
+    <div class="container hero-content">
+      <div class="logo-lockup reveal">
+        <div class="logo-circle" aria-hidden="true"></div>
+        <div class="logo-type">Serioz &amp; Seriozka</div>
+      </div>
+      <p class="hero-tag reveal" style="transition-delay:.08s">Вечная элегантность</p>
+      <a class="hero-cta reveal" style="transition-delay:.16s" href="#categories" data-scroll>
+        Смотреть коллекцию
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section id="categories" class="categories section-pad" aria-label="Категории">
+    <div class="container">
+      <h2 class="section-title reveal">Исключительные категории</h2>
+      <p class="section-sub reveal" style="transition-delay:.08s">Ювелирные изделия, костюмы и платья — создано для тех, кто ценит статусную эстетику.</p>
+
+      <div class="grid">
+        <article class="card reveal" aria-label="Ювелирные изделия">
+          <div class="card-media">
+  <img src="https://i.pinimg.com/1200x/c0/ef/3f/c0ef3f506c62978f3c87804af50e0bcf.jpg"
+       alt="Роскошные ювелирные изделия"
+       referrerpolicy="no-referrer"
+       loading="lazy">
+</div>
+          <div class="card-body">
+            <h3 class="card-title">Ювелирные изделия</h3>
+            <p class="card-sub">Индивидуальные украшения в единичных экземплярах: платиноиды, бриллианты, перламутр.</p>
+          </div>
+        </article>
+
+        <article class="card reveal" aria-label="Костюмы">
+          <div class="card-media">
+            <img src="https://i.pinimg.com/1200x/5f/7f/1e/5f7f1eea4434d77a7d67cac8486c6fca.jpg" width="100" height="50" alt="Премиальные свадебные костюмы" /> 
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Костюмы</h3>
+            <p class="card-sub">Точные посадки и ручные стежки. Итальянские ткани, финальная утюжка на пару.</p>
+          </div>
+        </article>
+
+        <article class="card reveal" aria-label="Платья">
+          <div class="card-media">
+            <img src="https://i.pinimg.com/736x/47/6c/90/476c9026eed684c1befa5a193029e831.jpg" alt="Изысканные свадебные платья" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Платья</h3>
+            <p class="card-sub">Кутюрные силуэты, шёлк, органза и тончайшее кружево. Подгонка по фигуре.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About with Parallax -->
+ <!-- HTML -->
+<section id="gallery" class="gallery section-pad" aria-label="Галерея и лукбук">
+  <div class="container">
+    <h2 class="section-title reveal">Лукбук</h2>
+    <p class="section-sub reveal" style="transition-delay:.08s">СОЗДАТЕЛЬ</p>
+<div class="lookbook-columns">
+  <!-- Женская сторона -->
+  <div class="lookbook-col" aria-label="Женская коллекция">
+    <h3 class="lookbook-col-title reveal" style="transition-delay:.1s">Женская коллекция</h3>
+
+    <div class="lookbook-grid">
+      <figure class="lookbook-item reveal" data-gender="female">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 02 — Женское дерзкое свадебное кимоно"
+          data-description="Легкое кимоно с акцентом на текстуру и пояс. Мягкие линии, ручная отделка, универсальная посадка."
+          data-img="https://i.pinimg.com/736x/6a/6f/bf/6a6fbf49e352bbd75f8ae68880a8e0b6.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 02 — Женское дерзкое свадебное кимоно</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/736x/6a/6f/bf/6a6fbf49e352bbd75f8ae68880a8e0b6.jpg" alt="Лук 02 — Женское дерзкое свадебное кимоно" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 02 — Женское дерзкое свадебное кимоно</figcaption>
+      </figure>
+
+      <figure class="lookbook-item reveal" data-gender="female">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 04 — Японское свадебное платье"
+          data-description="Платье с архитектурным силуэтом и выразительными деталями. Подчёркнутая талия, структурированные формы."
+          data-img="https://i.pinimg.com/1200x/68/de/1a/68de1ac2b27891162e695ad1626251bc.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 04 — Японское свадебное платье</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/1200x/68/de/1a/68de1ac2b27891162e695ad1626251bc.jpg" width="700" height="600" alt="Лук 04 — Повелитель Гиасса" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 04 — Японское свадебное платье</figcaption>
+      </figure>
+
+      <!-- Новые картинки (женская) -->
+      <figure class="lookbook-item reveal" data-gender="female">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 05 — Женское платье, минимализм"
+          data-description="Минималистичное платье прямого кроя. Чистые линии, акцент на ткани и пропорциях."
+          data-img="https://i.pinimg.com/736x/78/da/e2/78dae22630f1eb972f6a9f2d3aa86f5a.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 05 — Женское платье, минимализм</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/736x/78/da/e2/78dae22630f1eb972f6a9f2d3aa86f5a.jpg" alt="Лук 05 — Женское платье, минимализм" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 05 — Женское платье, минимализм</figcaption>
+      </figure>
+
+      <figure class="lookbook-item reveal" data-gender="female">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 06 — Жакет и юбка, текстуры"
+          data-description="Комплект с фактурной тканью: жакет с мягкими плечами и юбка миди. Комфорт и выразительность."
+          data-img="https://i.pinimg.com/736x/e8/8b/4a/e88b4abbcc922ee77ebb740760a9a982.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 06 — Жакет и юбка, текстуры</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/736x/e8/8b/4a/e88b4abbcc922ee77ebb740760a9a982.jpg" alt="Лук 06 — Жакет и юбка, текстуры" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 06 — Жакет и юбка, текстуры</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- Мужская сторона -->
+  <div class="lookbook-col" aria-label="Мужская коллекция">
+    <h3 class="lookbook-col-title reveal" style="transition-delay:.1s">Мужская коллекция</h3>
+
+    <div class="lookbook-grid">
+      <figure class="lookbook-item reveal" data-gender="male">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 01 — Белый дерзкий мужской костюм"
+          data-description="Двубортный костюм с острыми лацканами и выразительной посадкой. Чистый белый цвет для смелого образа."
+          data-img="https://i.pinimg.com/736x/8e/51/f5/8e51f530f75b2dc8f1586a18a2da283b.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 01 — Белый дерзкий мужской костюм</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/736x/8e/51/f5/8e51f530f75b2dc8f1586a18a2da283b.jpg" alt="Лук 01 — Белый дерзкий мужской костюм" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 01 — Белый дерзкий мужской костюм</figcaption>
+      </figure>
+
+      <figure class="lookbook-item reveal" data-gender="male">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 03 — Костюм и архитектура силуэта"
+          data-description="Структурированный костюм с графичной линией плеча и продуманной посадкой. Акцент на пропорциях."
+          data-img="https://i.pinimg.com/736x/10/a7/93/10a7931f510143ff161898935a36d13e.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 03 — Костюм и архитектура силуэта</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/736x/10/a7/93/10a7931f510143ff161898935a36d13e.jpg" alt="Лук 03 — Костюм и архитектура силуэта" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 03 — Костюм и архитектура силуэта</figcaption>
+      </figure>
+
+      <!-- Новые картинки (мужская) -->
+      <figure class="lookbook-item reveal" data-gender="male">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 05 — Мужской костюм, кэжуал"
+          data-description="Костюм с неформальным характером: мягкая конструкция, комфортная ткань, современная посадка."
+          data-img="https://i.pinimg.com/736x/d7/d0/8c/d7d08cccaee0bfc30a41df9056a370a1.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 05 — Мужской костюм, кэжуал</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/736x/d7/d0/8c/d7d08cccaee0bfc30a41df9056a370a1.jpg" alt="Лук 05 — Мужской костюм, кэжуал" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 05 — Мужской костюм, кэжуал</figcaption>
+      </figure>
+
+      <figure class="lookbook-item reveal" data-gender="male">
+        <button
+          class="lookbook-trigger"
+          type="button"
+          data-title="Лук 06 — Жилет и брюки, контраст"
+          data-description="Комплект из жилета и брюк с контрастными фактурами. Лаконичные линии и выразительные детали."
+          data-img="https://i.pinimg.com/1200x/ac/c0/db/acc0dbbd9893b4d22f417a99c83d5b8b.jpg"
+        >
+          <span class="sr-only">Открыть просмотр: Лук 06 — Жилет и брюки, контраст</span>
+          <div class="lookbook-image">
+            <img src="https://i.pinimg.com/1200x/ac/c0/db/acc0dbbd9893b4d22f417a99c83d5b8b.jpg" alt="Лук 06 — Жилет и брюки, контраст" loading="lazy" />
+          </div>
+        </button>
+        <figcaption class="lookbook-caption">Лук 06 — Жилет и брюки, контраст</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+<!-- Модалка просмотра -->
+<div id="lookbook-modal" class="lookbook-modal" role="dialog" aria-modal="true" aria-labelledby="lookbook-modal-title" hidden>
+  <div class="lookbook-modal-backdrop" data-close="true"></div>
+  <div class="lookbook-modal-dialog" role="document">
+    <button type="button" class="lookbook-modal-close" aria-label="Закрыть" data-close="true">✕</button>
+    <div class="lookbook-modal-media">
+      <img id="lookbook-modal-img" src="" alt="" />
+    </div>
+    <div class="lookbook-modal-content">
+      <h4 id="lookbook-modal-title"></h4>
+      <p id="lookbook-modal-desc"></p>
+    </div>
+  </div>
+</div>
+<!-- CSS -->
+<style>
+  .lookbook-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px;
+    align-items: start;
+  }
+
+  .lookbook-col {
+    display: grid;
+    gap: 16px;
+  }
+
+  .lookbook-col-title {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  /* 4 маленьких колонки с каждой стороны */
+  .lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .lookbook-item {
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .lookbook-trigger {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    text-align: inherit;
+  }
+
+  .lookbook-trigger:focus-visible .lookbook-image {
+    outline: 2px solid #222;
+    outline-offset: 2px;
+  }
+
+  .lookbook-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 2 / 3; /* иконки немного больше */
+    background: #f6f6f6;
+  }
+
+  .lookbook-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lookbook-caption {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0);
+    white-space: nowrap; border: 0;
+  }
+
+  /* Модальное окно */
+  .lookbook-modal[hidden] { display: none; }
+
+  .lookbook-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+  }
+
+  .lookbook-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: saturate(120%) blur(2px);
+  }
+
+  .lookbook-modal-dialog {
+    position: relative;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    gap: 0;
+  }
+
+  .lookbook-modal-close {
+    position: absolute;
+    top: 10px; right: 10px;
+    border: 0;
+    background: rgba(0,0,0,0.06);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .lookbook-modal-media {
+    background: #111;
+    display: grid;
+    place-items: center;
+  }
+
+  .lookbook-modal-media img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .lookbook-modal-content {
+    padding: 20px 24px;
+    display: grid;
+    align-content: start;
+    gap: 10px;
+  }
+
+  .lookbook-modal-content h4 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .lookbook-modal-content p {
+    margin: 0;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1280px) {
+    .lookbook-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .lookbook-modal-dialog {
+      max-width: 860px;
+      grid-template-columns: minmax(0, 1fr) 380px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .lookbook-columns {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .lookbook-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .lookbook-modal-dialog {
+      margin: 20px;
+      grid-template-columns: 1fr;
+    }
+    .lookbook-modal-content {
+      padding: 16px;
+    }
+  }
+</style>
+<!-- JS -->
+<script>
+  (function () {
+    const modal = document.getElementById('lookbook-modal');
+    const img = document.getElementById('lookbook-modal-img');
+    const title = document.getElementById('lookbook-modal-title');
+    const desc = document.getElementById('lookbook-modal-desc');
+
+    function openModal(data) {
+      img.src = data.img;
+      img.alt = data.title;
+      title.textContent = data.title;
+      desc.textContent = data.description;
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      img.src = '';
+      document.body.classList.remove('modal-open');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target.dataset.close === 'true') {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.hidden) {
+        closeModal();
+      }
+    });
+
+    document.querySelectorAll('.lookbook-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openModal({
+          img: btn.dataset.img,
+          title: btn.dataset.title,
+          description: btn.dataset.description
+        });
+      });
+    });
+  })();
+</script>
+  <!-- Trust & Contacts -->
+  <section id="trust" class="trust section-pad" aria-label="Доверие и контакты">
+    <div class="container">
+      <h2 class="section-title reveal">Нам доверяют</h2>
+      <p class="section-sub reveal" style="transition-delay:.08s">Отзывы клиентов о качестве, заботе и эстетике.</p>
+
+      <div class="quotes">
+        <blockquote class="quote reveal">
+          <p>«На следующий день после свадьбы мы развелись.»</p>
+          <small>— Shadowfient, Москва</small>
+        </blockquote>
+        <blockquote class="quote reveal">
+          <p>«Костюм идеальный хорошо сел, за пять минут до свадьбы сбежала с бывшим»</p>
+          <small>— tidehunter, Санкт‑Петербург</small>
+        </blockquote>
+        <blockquote class="quote reveal">
+          <p>«мне все очень понравилось.»</p>
+          <small>— Disruptor, Казань</small>
+        </blockquote>
+      </div>
+
+      <div class="contact">
+        <form class="form reveal" id="contactForm" novalidate>
+          <h3 class="card-title" style="margin-bottom:14px; color:#f0f0f0; text-transform:uppercase; letter-spacing:.6px;">Связаться с нами</h3>
+
+          <label class="field">
+            <span class="label">Имя</span>
+            <input class="input" type="text" name="name" placeholder="Ваше имя" required />
+          </label>
+
+          <label class="field">
+            <span class="label">Email</span>
+            <input class="input" type="email" name="email" placeholder="name@example.com" required />
+          </label>
+
+          <label class="field">
+            <span class="label">Сообщение</span>
+            <textarea class="textarea" name="message" placeholder="Кратко опишите запрос" required></textarea>
+          </label>
+
+          <button class="submit" type="submit">
+            Отправить
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <p id="formStatus" class="section-sub" style="margin-top:12px; display:none;"></p>
+        </form>
+
+        <aside class="contact-aside reveal" style="transition-delay:.12s">
+          <h4>Бутики и ателье</h4>
+          <p>Москва, Большая Никитская, 12<br>Санкт‑Петербург, Наб. реки Фонтанки, 34</p>
+
+          <h4>Часы</h4>
+          <p>Пн–Сб: 11:00–20:00 • Вс: по записи</p>
+
+          <h4>Социальные сети</h4>
+          <div class="social" aria-label="Социальные сети">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"/>
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.4"/>
+                <circle cx="17.5" cy="6.5" r="1.4" fill="currentColor"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21c5 0 9-4 9-9s-4-9-9-9S3 7 3 12c0 3.5 2.1 6.5 5.1 7.8l.9-3.4c-.3-.5-.4-1.1-.4-1.7 0-1.7 1.1-3.1 3-3.1.8 0 1.4.3 1.8.7.3.3.4.7.4 1.1 0 1.3-.8 2.8-1.9 2.8-.5 0-.9-.3-.9-.8 0-.2 0-.4.2-.6l.6-1.9c.1-.3.1-.6.1-.8 0-1.1-.8-2-2.1-2-1.6 0-2.7 1.2-2.7 2.9 0 1.1.4 2.3 1 3.1л-1.1 4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M15 3v4.5c1.1.9 2.4 1.5 3.8 1.7V13c-1.9-.2-3.7-1-5.2-2.3V16a4 4 0 11-3.2-3.9V8.5c-3.2-.1-5.8 2.4-5.8 5.6a5.6 5.6 0 1011.2 0V3h-.8z" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" aria-label="Футер">
+    <div class="container">
+      <div class="foot-brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-name" style="color:#e7e9ee; text-transform:uppercase; letter-spacing:.6px;">Serioz &amp; Seriozka</div>
+      </div>
+      <div class="foot-links">
+        <a class="foot-link" href="#categories" data-scroll>Категории</a>
+        <a class="foot-link" href="#about" data-scroll>О бренде</a>
+        <a class="foot-link" href="#gallery" data-scroll>Лукбук</a>
+        <a class="foot-link" href="#trust" data-scroll>Контакты</a>
+      </div>
+    </div>
+    <div class="container" style="margin-top:18px;">
+      <small style="color:#c9ced6;">© 2025 Serioz &amp; Seriozka. Все права защищены.</small>
+    </div>
+  </footer>
+
+  <script>
+    // IntersectionObserver reveal animations
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Parallax for About image (desktop only)
+    const aboutSection = document.querySelector('#about');
+    const aboutImg = document.querySelector('.about-img');
+    const onScrollParallax = () => {
+      if (!aboutSection || !aboutImg) return;
+      const scrolled = window.scrollY;
+      const sectionTop = aboutSection.offsetTop;
+      const sectionHeight = aboutSection.offsetHeight;
+      if (scrolled > sectionTop - window.innerHeight && scrolled < sectionTop + sectionHeight) {
+        const speed = 0.12;
+        const yPos = (scrolled - sectionTop) * speed;
+        aboutImg.style.transform = `translateY(${yPos - 50}px)`;
+      }
+    };
+    const enableParallaxIfDesktop = () => {
+      if (window.innerWidth > 768) {
+        window.addEventListener('scroll', onScrollParallax, { passive: true });
+      } else {
+        window.removeEventListener('scroll', onScrollParallax);
+        if (aboutImg) aboutImg.style.transform = 'translateY(0)';
+      }
+    };
+    enableParallaxIfDesktop();
+    window.addEventListener('resize', enableParallaxIfDesktop);
+
+    // Slider controls (scroll-snap rail)
+    const rail = document.getElementById('rail');
+    const next = document.getElementById('next');
+    const prev = document.getElementById('prev');
+    const scrollAmount = () => Math.round(rail.clientWidth * 0.7);
+    next?.addEventListener('click', () => rail.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+    prev?.addEventListener('click', () => rail.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+    rail?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') rail.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+      if (e.key === 'ArrowLeft') rail.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    // Contact form (basic client-side validation & fake submit)
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = (data.get('name') || '').toString().trim();
+      const email = (data.get('email') || '').toString().trim();
+      const message = (data.get('message') || '').toString().trim();
+      if (!name || !email || !message) {
+        status.style.display = 'block'; status.style.color = 'var(--red)';
+        status.textContent = 'Заполните все поля.'; return;
+      }
+      if (!validateEmail(email)) {
+        status.style.display = 'block'; status.style.color = 'var(--red)';
+        status.textContent = 'Введите корректный email.'; return;
+      }
+      status.style.display = 'block'; status.style.color = 'var(--red)';
+      status.textContent = 'Сообщение отправлено. Мы свяжемся с вами в ближайшее время.'; form.reset();
+    });
+
+    // Reduce-motion: disable Ken Burns
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const heroImg = document.querySelector('.hero-media img');
+    const onReduceMotion = () => {
+      if (mq.matches && heroImg) heroImg.style.animation = 'none';
+      else if (heroImg) heroImg.style.animation = 'kenburns 36s ease-in-out infinite alternate';
+    };
+    mq.addEventListener?.('change', onReduceMotion);
+    onReduceMotion();
+
+    // Fix anchor scrolling under fixed nav — custom scroll with offset
+    const NAV_SELECTOR = '.nav';
+    const navEl = document.querySelector(NAV_SELECTOR);
+    const getNavHeight = () => (navEl?.getBoundingClientRect().height || 68);
+
+    const scrollWithOffset = (target) => {
+      const y = target.getBoundingClientRect().top + window.scrollY - (getNavHeight() + 12);
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    };
+
+    document.querySelectorAll('a[data-scroll][href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href') || '';
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          scrollWithOffset(target);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
